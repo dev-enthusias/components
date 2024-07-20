@@ -10,16 +10,21 @@ export default function Page() {
     Array(OTP_LENGTH).fill(null)
   );
 
-  console.log(otp);
   const focusNextInput = (idx: number) => {
     if (idx < inputRefs.current.length - 1) {
       inputRefs.current[idx + 1]?.focus();
+      setTimeout(() => {
+        inputRefs.current[idx + 1]?.setSelectionRange(1, 1);
+      }, 0);
     }
   };
 
   const focusPrevInput = (idx: number) => {
     if (idx > 0) {
       inputRefs.current[idx - 1]?.focus();
+      setTimeout(() => {
+        inputRefs.current[idx - 1]?.setSelectionRange(1, 1);
+      }, 0);
     }
   };
 
@@ -54,8 +59,6 @@ export default function Page() {
 
   const handlePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
     const value = e.clipboardData.getData("text");
-    console.log(value);
-    console.log(isNaN(+value));
 
     if (isNaN(+value)) return;
 
